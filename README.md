@@ -24,9 +24,15 @@ Le but de ce projet est, dans un premier temps, d’arriver à séparer les pist
 
 	python3 wav_midi_pdf_pipeline.py [-h] input_wav_path output_pdf_name
 
+### example usage
+	
+	spleeter separate -p spleeter:5stems -o splitted audiofiles/symphony_instrumental_1st_half.wav
+
+	python3 wav_midi_pdf_pipeline.py splitted/symphony_instrumental_1st_half/piano.wav symphony_piano.pdf
+
 ### TODO
 
-input: mp3/wav
+input: mp3/wav  
 
 apply spleeter 5stems -> seperated instruments in wav files
 
@@ -36,17 +42,17 @@ for each instrument:
 	- apply mscore3 to midi file -> pdf sheet music
 
 ### Tools: how to use
-### Split instruments in different mp3 files
+#### Split instruments in different mp3 files
 
-spleeter separate -p spleeter:5stems -o splitted file.mp3:
+spleeter separate -p spleeter:5stems -o splitted file.mp3:  
 note: audio can crash the cpu, so cut if necessary
 
-### Predict midi from audio
+#### Predict midi from audio
 
-basic-pitch . audio.mp3 --sonify-midi
+basic-pitch . audio.mp3 --sonify-midi  
 basic-pitch -h: help about mp3 to midi model
 
-### Generate pdf sheet from midi file
+#### Generate pdf sheet from midi file
 
 mscore3 file.mid -o output.pdf
 
