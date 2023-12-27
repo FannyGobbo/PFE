@@ -8,9 +8,9 @@ Le but de ce projet est, dans un premier temps, d’arriver à séparer les pist
 
 ### objectif
 
-- spleeter(from deezer) pour split les musiques selon instruments
-- basic-pitch(from spotify) pour produire fichiers midi à partir des fichiers wav obtenues précedemment
-- mscore3(musescore) pour génerer les pdf
+- spleeter [(from deezer)](https://github.com/deezer/spleeter) pour split les musiques selon instruments dans des fichiers wav.
+- basic-pitch [(from spotify)](https://github.com/spotify/basic-pitch) pour produire fichiers midi à partir des fichiers wav.
+- mscore3 [(musescore)](https://ourcodeworld.com/articles/read/1408/how-to-install-musescore-3-in-ubuntu-2004) pour génerer les pdf à partir des midi.
 
 ### pour le moment
 
