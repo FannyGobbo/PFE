@@ -40,10 +40,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Convert WAV to MIDI  file and then to PDF.")
     parser.add_argument("input_wav_path", help="Input wav full file path")
     parser.add_argument("output_pdf_name", help="Output PDF file name, it will generate the file in sheets/")
+    parser.add_argument("--unsplitted_audio_file", help="Input wav file of unsplitted audio")
     args = parser.parse_args()
 
+    # TODO: implement this 'spleeter separate -p spleeter:5stems -o splitted file.mp3'
+    unsplitted_audio_file = args.unsplitted_audio_file
     wav_file = args.input_wav_path
     pdf_file =  args.output_pdf_name
+
+    splitting_wav_process = ["spleeter separate -p","spleeter:5stems"]
 
     # Convert wav file to PDF
     convert_wav_to_pdf(wav_file, pdf_file)
