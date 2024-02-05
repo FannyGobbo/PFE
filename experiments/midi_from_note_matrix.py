@@ -2,7 +2,7 @@ import pandas as pd
 from midiutil import MIDIFile
 
 # Load the CSV file into a DataFrame
-df = pd.read_csv("datasets/musicnet/musicnet/train_labels/1727.csv", delimiter=",")
+df = pd.read_csv("../datasets/musicnet/musicnet/train_labels/1727.csv", delimiter=",")
 
 # Extract the required columns: start_time, end_time, note
 note_list = df[["start_time", "end_time", "note"]].values.tolist()
@@ -24,9 +24,9 @@ def create_midi_from_notes(note_list, output_file="output.mid", tempo=120):
 
     # Iterate over each note in the list of lists and add it to the MIDI file
     for note_start, note_end, note_pitch in note_list:
-        # convert to seconds, WTF ?????? pourquoi c'est des 10_000eme de seconde
-        note_start /= 10_000
-        note_end /= 10_000
+        # convert to seconds, WTF ?????? pourquoi c'est des 100_000ème de seconde
+        note_start /= 100_000
+        note_end /= 100_0000
 
         # Convert second time values to quarter notes
         # 120 bpm = 2bps = 1b per 0.5 seconds (beat = quarter note)
@@ -45,4 +45,4 @@ def create_midi_from_notes(note_list, output_file="output.mid", tempo=120):
 
 
 # Call the function to create the MIDI file
-create_midi_from_notes(note_list, "output.mid")
+create_midi_from_notes(note_list, "midi_from_notes.mid")
