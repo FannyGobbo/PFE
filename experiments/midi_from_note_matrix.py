@@ -30,8 +30,8 @@ def create_midi_from_notes(note_list, output_file="output.mid", tempo=TEMPO):
     # Iterate over each note in the list of lists and add it to the MIDI file
     for note_start, note_end, note_pitch in note_list:
         # convert to seconds, WTF ?????? pourquoi c'est des 100_000ème de seconde
-        note_start /= 100_000
-        note_end /= 100_0000
+        note_start /= 43447
+        note_end /= 43447
 
         # Convert second time values to quarter notes
         # quarter note duration, get the tempo in bps (/60) then take the inverse
