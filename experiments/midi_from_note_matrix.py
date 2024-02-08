@@ -1,21 +1,10 @@
 import pandas as pd
 from midiutil import MIDIFile
 """
-TODO: automatic BPM computation
-
+TODO:
 """
-# Load the CSV file into a DataFrame
-df = pd.read_csv("../datasets/musicnet/musicnet/train_labels/1727.csv", delimiter=",")
 
-# Extract the required columns: start_time, end_time, note
-note_list = df[["start_time", "end_time", "note"]].values.tolist()
-
-# Print the first few rows to verify the data
-print(note_list[:5])  # Adjust the slice as per your need
-
-TEMPO = 100
-
-def create_midi_from_notes(note_list, output_file="output.mid", tempo=TEMPO):
+def create_midi_from_notes(note_list, output_file="output.mid", tempo=100):
     # Create a MIDIFile object
     midi = MIDIFile(1, deinterleave=False)
 
@@ -27,9 +16,12 @@ def create_midi_from_notes(note_list, output_file="output.mid", tempo=TEMPO):
     # Set tempo (in beats per minute)
     midi.addTempo(track, time, tempo)
 
+    # Set program number to change the instrument (40 is violi)
+    # midi.addProgramChange(track, time, 0, 40)
+
     # Iterate over each note in the list of lists and add it to the MIDI file
     for note_start, note_end, note_pitch in note_list:
-        # convert to seconds, WTF ?????? pourquoi c'est des 100_000ème de seconde
+        # convert to seconds, WTF ??????
         note_start /= 43447
         note_end /= 43447
 
@@ -43,11 +35,20 @@ def create_midi_from_notes(note_list, output_file="output.mid", tempo=TEMPO):
         # Add the note using the converted time values
         midi.addNote(track, 0, note_pitch, note_start_time_quarter_notes, note_duration_quarter_notes, volume=100)
 
-
     # Write the MIDI data to a file
     with open(output_file, "wb") as midi_file:
         midi.writeFile(midi_file)
 
+if __name__ == '__main__':
+    # Load the CSV file into a DataFrame
+    df = pd.read_csv("../datasets/musicnet/musicnet/train_labels/1727.csv", delimiter=",")
 
-# Call the function to create the MIDI file
-create_midi_from_notes(note_list, "midi_from_notes.mid")
+    # Extract the required columns: start_time, end_time, note
+    note_list = df[["start_time", "end_time", "note"]].values.tolist()
+
+    # Print the first few rows to verify the data
+    print(note_list[:5])  # Adjust the slice as per your need
+    TEMPO = 100
+
+    # Call the function to create the MIDI file
+    create_midi_from_notes(note_list, "midi_from_notes.mid", tempo=TEMPO)
