@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="static/style/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload a document</h2>
+        <form class="form-container" action="/process" method="post" enctype="multipart/form-data">
+            <label for="file">Select a file:</label>
+            <input type="file" name="file" accept=".mp3,.wav">
+            <br>
+            <input type="submit" value="Upload" class="file-upload">
+        </form>
+    </div>
+</body>
+</html>
