@@ -11,13 +11,9 @@ Takes audiofile as input
 perform cqt and format the data
 to be passed through model
 gather output of model and generate midi from it
+USAGE:
+    python3 inference.py -h
 """
-
-import sys
-def pp(*p): # for debug
-    for idx, arg_value in enumerate(p): print(f'{idx}:\tval= {arg_value}\ttype= {type(arg_value)}')
-    sys.exit()
-
 
 class TransformerModel(nn.Module):
     def __init__(self, input_size, output_size, num_layers=3, hidden_size=128, num_heads=2, dropout=0.1):
@@ -124,7 +120,7 @@ if __name__ == '__main__':
     SPLIT = args.split
     input_file = args.input_file_path
     output_midi_name =  args.output_midi_name
-    
+
     if not output_midi_name.endswith('.mid'):
         output_midi_name += '.mid'
 
