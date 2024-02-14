@@ -8,13 +8,39 @@
 </head>
 <body>
     <div class="container">
-        <h2>Upload a document</h2>
+        <div class="header">
+            <img src="static/images/logo-pfe.png" alt="Logo" class="logo">
+            <p class="program-description">Automatic music transcription</p>
+        </div>
+
+
+
+        <h2>Upload a music file</h2>
+
         <form class="form-container" action="/process" method="post" enctype="multipart/form-data">
-            <label for="file">Select a file:</label>
-            <input type="file" name="file" accept=".mp3,.wav">
-            <br>
+            <div class="form-group">    
+                <label for="file">Select a file:</label>
+                <input type="file" name="file">
+            </div>
             <input type="submit" value="Upload" class="file-upload">
         </form>
+
+
+        <div class="description-container">
+            <div class="description">
+                <h2>Description : </h2>
+                <p>This program takes a music file, and give music sheets for the different instruments.</p>
+                <p>Here's the code on our <a href="https://github.com/FannyGobbo/PFE">github page</a></p>
+            </div>
+            <div class="who-we-are">
+                <h2>Who We Are</h2>
+                <p>We are 4 students at CY Tech Pau (France), specializing in AI.</p>
+                <p>Louis BOUCHEREAU</p>
+                <p>Alan COURTEL</p>
+                <p>Fanny GOBBO</p>
+                <p>Hugo MOSSER</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

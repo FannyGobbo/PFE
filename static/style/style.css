@@ -38,6 +38,37 @@ a:hover {
     text-decoration: underline;
 }
 
+
+/* Header styles */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    width: 150px; /* Adjust the width as needed */
+    margin-bottom: 20px;
+}
+
+/* Description and "Who We Are" section styles */
+.description-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.description, .who-we-are {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.description h2, .who-we-are h2 {
+    margin-bottom: 20px;
+}
+
+
+
+
 /* Form styles */
 .form-container {
     background-color: #fff;
@@ -56,7 +87,7 @@ a:hover {
 }
 
 .form-group input[type="file"] {
-    display: none; /* Hide the file input by default */
+    width: auto;
 }
 
 .file-upload {
@@ -95,5 +126,16 @@ a:hover {
 }
 
 .results-container a.download-link:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.back-link:hover {
     text-decoration: underline;
 }

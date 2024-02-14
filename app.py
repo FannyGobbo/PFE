@@ -8,13 +8,14 @@ app = Flask(__name__)
 ####################################################################################################### OTHER FUNCTIONS (NO PATH)
 
 def is_audio_file(filepath):
-    audio_extensions = ['.mp3', '.wav']
+    # audio_extensions = ['.mp3', '.wav'] #real thing, REMOVE next line
+    audio_extensions = ['.mp3', '.wav', '.midi']
     file_ext = os.path.splitext(filepath)[1]
     return file_ext.lower() in audio_extensions
 
 def process_music(filepath, id):
     run(filepath, id)
-    print("process") # placeholder, to be removed
+    
 
 def generate_id ():
     return str(uuid.uuid4())
@@ -40,7 +41,7 @@ def upload_file():
         uploaded_file.save(file_path)
         processed_succesfully = process_music(file_path, folder_id)
         results_dir = os.path.join('results', folder_id)
-        result_files = os.listdir(results_dir)
+        result_files = [file for file in os.listdir(results_dir) if os.path.isfile(os.path.join(results_dir, file))]
         return render_template('results.html', folder_id=folder_id, files=result_files)
     
     return render_template('index.html')
