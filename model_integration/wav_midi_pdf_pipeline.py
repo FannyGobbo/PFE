@@ -36,7 +36,6 @@ if __name__ == "__main__":
     parser.add_argument("--split", action='store_true', default=False, help="will split the input file using spleeter (5 new files generated, bass.wav, drums.wav, other.wav, piano.wav, vocals.wav)")
     args = parser.parse_args()
 
-    # TODO: implement this 'spleeter separate -p spleeter:5stems -o splitted file.mp3'
     SPLIT = args.split
     input_file = args.input_file_path
     pdf_file =  args.output_pdf_name

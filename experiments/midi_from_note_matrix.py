@@ -27,7 +27,7 @@ def create_midi_from_notes(note_list, output_file="output.mid", tempo=100):
 
         # Convert second time values to quarter notes
         # quarter note duration, get the tempo in bps (/60) then take the inverse
-        quarter_note_duration_s = 1 / (TEMPO / 60)
+        quarter_note_duration_s = 1 / (tempo / 60)
         note_start_time_quarter_notes = note_start / quarter_note_duration_s
         note_duration_quarter_notes = (note_end - note_start) / quarter_note_duration_s
         # print(f'note start: {note_start_time_quarter_notes}\tduration: {note_duration_quarter_notes}\tpitch : {note_pitch}')
