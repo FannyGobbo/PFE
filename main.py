@@ -17,9 +17,7 @@ def run (filepath, id):
     
     # do predict to midi
     
-    # do midi to sheet => save to results/<id>/ 
-
-    #for file in midi_folder_path: #real thing, REMOVE next line
+    # do midi to sheet
     
     # PLACEHOLDER 
     os.system(f"cp temp/out.midi {midi_folder_path}")
@@ -30,7 +28,7 @@ def run (filepath, id):
             filename = os.path.basename(file)
             pdf_filename = os.path.splitext(filename)[0] + '.pdf'
             pdf_filepath = os.path.join(res_folder_path, pdf_filename)
-            #os.system(f"mscore3 {file_path} -o {pdf_filepath} 2>> /dev/null")
+            os.system(f"mscore3 {file_path} -o {pdf_filepath} 2>> /dev/null")
     
     # PLACEHOLDER
     file_path = os.path.join(res_folder_path, "toto")
