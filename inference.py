@@ -1,12 +1,10 @@
-import argparse
-import librosa
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import matplotlib.pyplot as plt
-from midiutil import MIDIFile
-import numpy as np
+import librosa
+import argparse
 import subprocess
+import numpy as np
+import torch.nn as nn
+from midiutil import MIDIFile
 """
 audio -> midi -> pdf
 USAGE:
