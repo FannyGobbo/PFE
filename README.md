@@ -8,6 +8,10 @@ Le but de ce projet est, dans un premier temps, d’arriver à séparer les pist
 
 ### Librairies Python 
 Flask : `pip install flask`
+Torch : `pip install torch`
+Librosa : `pip install librosa`
+Midiutil : `pip install midiutil`
+Music21 : `pip install music21`
 
 Il est possible qu'il faille installer uuid\
 uuid : `pip install uuid`
