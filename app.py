@@ -3,13 +3,13 @@ import os
 from main import run
 import uuid
 
+
 app = Flask(__name__)
 
 ####################################################################################################### OTHER FUNCTIONS (NO PATH)
 
 def is_audio_file(filepath):
-    # audio_extensions = ['.mp3', '.wav'] #real thing, REMOVE next line
-    audio_extensions = ['.mp3', '.wav', '.midi']
+    audio_extensions = ['.mp3', '.wav']
     file_ext = os.path.splitext(filepath)[1]
     return file_ext.lower() in audio_extensions
 
@@ -35,13 +35,18 @@ def upload_file():
     
     if uploaded_file.filename != '' and is_audio_file(uploaded_file.filename):
         folder_id = generate_id()
+        
         folder_path = os.path.join('uploads', folder_id)
         os.makedirs(folder_path, exist_ok=True)
+        
         file_path = os.path.join(folder_path, uploaded_file.filename)
         uploaded_file.save(file_path)
-        processed_succesfully = process_music(file_path, folder_id)
+        
+        process_music(file_path, folder_id)
+        
         results_dir = os.path.join('results', folder_id)
         result_files = [file for file in os.listdir(results_dir) if os.path.isfile(os.path.join(results_dir, file))]
+        
         return render_template('results.html', folder_id=folder_id, files=result_files)
     
     return render_template('index.html')
