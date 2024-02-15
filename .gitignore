@@ -2,3 +2,7 @@ model_integration/MuseScore-4.1.1.232071203-x86_64.AppImage
 model_integration/pretrained_models/
 datasets/
 basic-pitch/
+.venv
+__pycache__
+temp/
+TODO.md

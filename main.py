@@ -1,10 +1,8 @@
 import os
 
 
-
-####################################################################################################### MAIN RUN FUNCTION
-
 def run (filepath, id):
+    ######################## INIT
     # create folders
     res_folder_path = os.path.join('results', id)
     os.makedirs(res_folder_path)
@@ -13,11 +11,18 @@ def run (filepath, id):
     split_folder_path = os.path.join(res_folder_path, 'splited-sources')
     os.makedirs(split_folder_path)
     
-    # do split
+    ######################## SPLITTER
     
-    # do predict to midi
     
-    # do midi to sheet
+    
+    
+    
+    ######################## TRACK TO MIDI
+    
+    
+    
+    
+    ######################## MIDI TO SHEET MUSIC 
     
     # PLACEHOLDER 
     os.system(f"cp temp/out.midi {midi_folder_path}")
@@ -39,5 +44,3 @@ def run (filepath, id):
     file_path = os.path.join(res_folder_path, "tutu")
     with open(file_path, 'w') as f:
         pass
-    
-    return True
