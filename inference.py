@@ -1,16 +1,14 @@
 import argparse
 import librosa
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
+from midiutil import MIDIFile
 import numpy as np
+import subprocess
 """
-Takes audiofile as input
-perform cqt and format the data
-to be passed through model
-gather output of model and generate midi from it
+audio -> midi -> pdf
 USAGE:
     python3 inference.py -h
 """
@@ -28,7 +26,8 @@ class TransformerModel(nn.Module):
             d_model=input_size,
             nhead=num_heads,
             dim_feedforward=hidden_size,
-            dropout=dropout
+            dropout=dropout,
+            batch_first=True 
         )
         self.transformer_encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=num_layers)
 
@@ -39,6 +38,7 @@ class TransformerModel(nn.Module):
         output = self.transformer_encoder(src)
         output = self.output_layer(output)
         return output
+
 
 def convert_to_notes(matrix, timestep):
     notes = []
@@ -73,7 +73,6 @@ def convert_to_notes(matrix, timestep):
     sorted_notes = sorted(notes, key=lambda x: x[0])       
     return sorted_notes
 
-from midiutil import MIDIFile
 
 def create_midi_from_notes(note_list, output_file="inference.mid", tempo=100):
     # Create a MIDIFile object
@@ -109,18 +108,12 @@ def create_midi_from_notes(note_list, output_file="inference.mid", tempo=100):
     # Write the MIDI data to a file
     with open(output_file, "wb") as midi_file:
         midi.writeFile(midi_file)
+    print(f'MIDI file created : {output_file}')
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Convert WAV to MIDI  file and then to PDF.")
-    parser.add_argument("input_file_path", help="Input wav full file path")
-    parser.add_argument("output_midi_name", help="Output midi file name")
-    parser.add_argument("--split", action='store_true', default=False, help="will split the input file using spleeter (5 new files generated, bass.wav, drums.wav, other.wav, piano.wav, vocals.wav)")
-    args = parser.parse_args()
+    return output_file
 
-    SPLIT = args.split
-    input_file = args.input_file_path
-    output_midi_name =  args.output_midi_name
 
+def convert_audio_to_midi(input_file: str, output_midi_name: str, split: bool=False):
     if not output_midi_name.endswith('.mid'):
         output_midi_name += '.mid'
 
@@ -146,10 +139,10 @@ if __name__ == '__main__':
     cqt_data = np.vstack((cqt_data, zeros))
     cqt_transposed = np.abs(np.transpose(cqt_data))
     cqts_tensor = torch.tensor(cqt_transposed, dtype=torch.float32)
-    print(cqts_tensor.shape, cqts_tensor)
 
     # --- inference through model --- 
     # --------------------------------------------------------
+    print('running inference...')
     with torch.no_grad():
         model.eval()  # Set the model to evaluation mode
         output = model(cqts_tensor)
@@ -157,9 +150,55 @@ if __name__ == '__main__':
     output_np = np.transpose(output_np)
     NOTE_THRESHOLD = 0.5
     output_np = np.where(output_np > NOTE_THRESHOLD, 1, 0)
-    print(output_np, output_np.shape)
 
     # --- convert to midi ---
     # --------------------------------------------------------
+    print('converting to note events...')
     note_events = convert_to_notes(output_np, 0.1)
-    create_midi_from_notes(note_events, output_midi_name)
+    print('converting to midi...')
+    midi_file = create_midi_from_notes(note_events, output_midi_name)
+
+    return midi_file
+
+
+from music21 import midi
+from music21 import stream
+import os
+
+def convert_midi_to_pdf(midi_file, pdf_file):    
+    # Load MIDI file
+    mf = midi.MidiFile()
+    mf.open(midi_file)
+    mf.read()
+    mf.close()
+
+    # Create a stream from MIDI file
+    score = midi.translate.midiFileToStream(mf)
+
+    # Create a temporary MusicXML file
+    xml_file = "temp.musicxml"
+    score.write("musicxml", xml_file)
+
+    # Convert MusicXML to PDF using MuseScore
+    os.system(f"musescore {xml_file} -o {pdf_file}")
+
+    # Remove temporary MusicXML file
+    os.remove(xml_file)
+    print(f'created pdf from midi : {pdf_file}')
+
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Convert WAV to MIDI  file and then to PDF.")
+    parser.add_argument("input_file_path", help="Input wav full file path")
+    parser.add_argument("output_midi_name", help="Output midi file name")
+    parser.add_argument("--split", action='store_true', default=False, help="will split the input file using spleeter (5 new files generated, bass.wav, drums.wav, other.wav, piano.wav, vocals.wav)")
+    args = parser.parse_args()
+
+    SPLIT = args.split
+    input_file = args.input_file_path
+    output_midi_name =  args.output_midi_name
+
+    midi_file = convert_audio_to_midi(input_file, output_midi_name, SPLIT)
+    pdf_file = midi_file.split('.')[0] + '.pdf' 
+    subprocess.run(["mscore3", midi_file, "-o", pdf_file])
