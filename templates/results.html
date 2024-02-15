@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="static/style/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="static/images/logo-pfe.png" alt="Logo" class="logo">
+            <p class="program-description">Automatic music transcription</p>
+        </div>
+
+
+        <h1>Results</h1>
+        
+        <div class="results-container">
+            <ul>
+                {% for file in files %}
+                <li>
+                    {{ file }}
+                    <a href="{{ url_for('download_file', folder_id=folder_id, filename=file) }}" class="download-link" download>Download</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <a href="/" class="back-link">Back to Main Page</a>
+    </div>
+</body>
+</html>

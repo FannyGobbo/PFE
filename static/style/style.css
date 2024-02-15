@@ -1,0 +1,141 @@
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul, li, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Global styles */
+body {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* Header styles */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    width: 150px; /* Adjust the width as needed */
+    margin-bottom: 20px;
+}
+
+/* Description and "Who We Are" section styles */
+.description-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.description, .who-we-are {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.description h2, .who-we-are h2 {
+    margin-bottom: 20px;
+}
+
+
+
+
+/* Form styles */
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="file"] {
+    width: auto;
+}
+
+.file-upload {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.file-upload:hover {
+    background-color: #0056b3;
+}
+
+/* Results page styles */
+.results-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.results-container ul {
+    padding-left: 20px;
+}
+
+.results-container li {
+    margin-bottom: 5px;
+}
+
+.results-container a.download-link {
+    display: inline-block;
+    margin-left: 10px;
+    color: #007bff;
+}
+
+.results-container a.download-link:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
