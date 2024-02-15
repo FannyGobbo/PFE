@@ -1,0 +1,13 @@
+engineering.atspotify post about basic-pitch
+https://engineering.atspotify.com/2022/06/meet-basic-pitch/#:~:text=To%20build%20Basic%20Pitch%2C%20we,and%20make%20our%20models%20bigger.
+
+--- How was basic-pitch trained? ---
+Harmonic CNN = NN archi to detect melodies
+Constant-Q Transform = similar to fourier transform, puts the signal into 
+frequency "bins"
+Harmonic CQT = The Harmonic CQT (HCQT) [13]
+is a transformation of the CQT which aligns harmonically-related
+frequencies along a third dimension, allowing small convolutional
+kernels to capture harmonically-related information
+
+

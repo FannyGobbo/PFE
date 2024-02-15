@@ -1,0 +1,2 @@
+clsudo apt install -y musescore3 timidity
+pip install music21 librosa
