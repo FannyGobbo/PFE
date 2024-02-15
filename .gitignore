@@ -6,3 +6,5 @@ basic-pitch/
 __pycache__
 temp/
 TODO.md
+results/*
+uploads/*
