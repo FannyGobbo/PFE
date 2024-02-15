@@ -29,9 +29,6 @@ def run (filepath, id):
     
     ######################## MIDI TO SHEET MUSIC 
     
-    # PLACEHOLDER 
-    # os.system(f"cp temp/out.midi {midi_folder_path}")
-    
     for file in os.listdir(midi_folder_path):
         file_path = os.path.join(midi_folder_path, file)
         if os.path.isfile(file_path):
@@ -39,13 +36,4 @@ def run (filepath, id):
             pdf_filename = os.path.splitext(filename)[0] + '.pdf'
             pdf_filepath = os.path.join(res_folder_path, pdf_filename)
             os.system(f"mscore3 {file_path} -o {pdf_filepath} 2>> /dev/null")
-    
-    # PLACEHOLDER
-    file_path = os.path.join(res_folder_path, "toto")
-    with open(file_path, 'w') as f:
-        pass
-    
-    # PLACEHOLDER
-    file_path = os.path.join(res_folder_path, "tutu")
-    with open(file_path, 'w') as f:
-        pass
+
