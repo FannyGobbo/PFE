@@ -1,5 +1,6 @@
 import os
-
+import inference
+from inference import convert_audio_to_midi
 
 def run (filepath, id):
     ######################## INIT
@@ -10,22 +11,26 @@ def run (filepath, id):
     os.makedirs(midi_folder_path) 
     split_folder_path = os.path.join(res_folder_path, 'splited-sources')
     os.makedirs(split_folder_path)
+
+    # PLACEHOLDER
+    os.system(f"cp temp/1727.wav {split_folder_path}")
     
     ######################## SPLITTER
     
     
     
-    
+
     
     ######################## TRACK TO MIDI
     
-    
-    
+    for file in os.listdir(split_folder_path):
+        filepath = os.path.join(split_folder_path, file)
+        convert_audio_to_midi(filepath, midi_folder_path)
     
     ######################## MIDI TO SHEET MUSIC 
     
     # PLACEHOLDER 
-    os.system(f"cp temp/out.midi {midi_folder_path}")
+    # os.system(f"cp temp/out.midi {midi_folder_path}")
     
     for file in os.listdir(midi_folder_path):
         file_path = os.path.join(midi_folder_path, file)

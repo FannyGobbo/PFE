@@ -72,7 +72,7 @@ def convert_to_notes(matrix, timestep):
     return sorted_notes
 
 
-def create_midi_from_notes(note_list, output_file="inference.mid", tempo=100):
+def create_midi_from_notes(note_list, output_file_path, tempo=100):
     # Create a MIDIFile object
     midi = MIDIFile(1, deinterleave=False)
 
@@ -104,16 +104,16 @@ def create_midi_from_notes(note_list, output_file="inference.mid", tempo=100):
         midi.addNote(track, 0, note_pitch, note_start_time_quarter_notes, note_duration_quarter_notes, volume=100)
 
     # Write the MIDI data to a file
-    with open(output_file, "wb") as midi_file:
+    with open(output_file_path, "wb") as midi_file:
         midi.writeFile(midi_file)
-    print(f'MIDI file created : {output_file}')
+    print(f'MIDI file created : {output_file_path}')
 
-    return output_file
+    return output_file_path
 
 
-def convert_audio_to_midi(input_file: str, output_midi_name: str, split: bool=False):
-    if not output_midi_name.endswith('.mid'):
-        output_midi_name += '.mid'
+def convert_audio_to_midi(input_file: str, output_folder_path: str):
+    filename = input_file.split('.')[0].split('/')[-1]
+    output_file_path = output_folder_path + '/' + filename + '.mid'
 
     # --- load audio --- 
     # --------------------------------------------------------
@@ -154,7 +154,7 @@ def convert_audio_to_midi(input_file: str, output_midi_name: str, split: bool=Fa
     print('converting to note events...')
     note_events = convert_to_notes(output_np, 0.1)
     print('converting to midi...')
-    midi_file = create_midi_from_notes(note_events, output_midi_name)
+    midi_file = create_midi_from_notes(note_events, output_file_path)
 
     return midi_file
 
