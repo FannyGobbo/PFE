@@ -17,7 +17,9 @@ def run (filepath, id):
     
     ######################## SPLITTER
     
-    
+        # using spleeter as our model is not as efficient
+        # splitting_wav_process = ["spleeter", "separate", "-p", "spleeter:5stems", "-o", "splitted", filepath]
+        # subprocess.run(splitting_wav_process)
     
 
     
